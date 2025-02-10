@@ -32,7 +32,6 @@ $hash_ids = new Hashids(env('APP_KEY'), 8);
               </div>
             </div>
           @endforeach
-
           @if (!$games->isEmpty())
             {!! $games->withQueryString()->links('pagination::bootstrap-5') !!}
           @endif
