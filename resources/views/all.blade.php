@@ -6,6 +6,16 @@ $hash_ids = new Hashids(env('APP_KEY'), 8);
 @endphp
 
 @section('content')
+  <div class="main-banner">
+    <div class="row">
+      <div class="col-lg-7">
+        <div class="header-text">
+          <h6>Welcome To Rutac Games</h6>
+          <h4><em>Browse</em> Our Popular Games Here</h4>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="most-popular">
     <div class="row">
@@ -13,8 +23,24 @@ $hash_ids = new Hashids(env('APP_KEY'), 8);
         <div class="heading-section">
           <h4><em>All</em> Games</h4>
         </div>
-        <div class="row">
-          @foreach ($games as $game)
+        <div class="row" id="post-container">
+          {{-- <div class="col-lg-12" id="post-container"> --}}
+            @include('partials.all')
+          {{-- </div> --}}
+
+          <div id="loading" class="text-center my-3" style="display: none;">
+            <div id="js-preloader" class="js-preloader">
+              <div class="preloader-inner">
+                <span class="dot"></span>
+                <div class="dots">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{-- @foreach ($games as $game)
             <div class="col-lg-3 col-sm-6">
               <div class="item">
                 <img src="{{$game->thumbnail}}" alt="">
@@ -34,11 +60,34 @@ $hash_ids = new Hashids(env('APP_KEY'), 8);
           @endforeach
           @if (!$games->isEmpty())
             {!! $games->withQueryString()->links('pagination::bootstrap-5') !!}
-          @endif
+          @endif --}}
         </div>
       </div>
     </div>
   </div>
+@endsection
 
+@section('scripts')
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+<script>
+    let page = 1;
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() >= $(document).height() - 10) {
+          loadMorePosts();
+        }
+    });
 
+    function loadMorePosts() {
+      page++;
+      $('#loading').show();
+      $.get("{{ url('/all-load') }}?page=" + page, function (data) {
+          if (data.trim() === '') {
+            $(window).off("scroll");
+          } else {
+            $('#post-container').append(data);
+            $('#loading').hide();
+          }
+      });
+    }
+</script>
 @endsection

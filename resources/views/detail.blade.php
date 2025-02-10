@@ -2,7 +2,7 @@
 
 @section('content')
   <!-- ***** Featured Start ***** -->
-  <div class="row">
+  <div class="row mb-3">
     <div class="col-lg-12">
       <div class="feature-banner header-text">
         <div class="row">
@@ -24,9 +24,6 @@
   <!-- ***** Details Start ***** -->
   <div class="game-details">
     <div class="row">
-      <div class="col-lg-12">
-        <h2>{{$game->title}}</h2>
-      </div>
       <div class="col-lg-12">
         <div class="content">
           <div class="row">

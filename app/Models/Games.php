@@ -207,4 +207,9 @@ class Games extends Model
 
         return false;
     }
+
+    public static function game_search($title)
+    {
+        return self::where('title', 'LIKE', "%{$title}%")->get();
+    }
 }

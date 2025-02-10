@@ -21,3 +21,5 @@ Route::get('/', function () {
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 Route::get('/detail/{encode_id}', [HomeController::class, 'show'])->name('detail');
 Route::get('/all', [HomeController::class, 'all'])->name('all');
+Route::get('/all-load', [HomeController::class, 'all_load'])->name('all_load');
+Route::get('/search', [HomeController::class, 'search'])->name('search');
