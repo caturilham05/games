@@ -1,7 +1,9 @@
 @extends('layout.index')
 
 @php
+use Illuminate\Support\Str;
 use Hashids\Hashids;
+
 $hash_ids = new Hashids(env('APP_KEY'), 8);
 @endphp
 
@@ -32,7 +34,7 @@ $hash_ids = new Hashids(env('APP_KEY'), 8);
                   <h4>{!!$random->title!!}</h4>
                   <span>{!!$random->platform!!}</span>
                   <div style="color: #888 !important; font-size: 10px; margin-top: 5px">{!!$random->genre!!}</div>
-                  <div style="font-size: 12px; color: #888; margin-top: 5px ">{!!$random->short_description!!}</div>
+                  <div style="font-size: 12px; color: #888; margin-top: 5px ">{!!Str::words($random->short_description, 5, ' ...')!!}</div>
                   <div style="font-size: 9px; color: #888; margin-top: 10px ">{{date('d F Y', strtotime($random->release_date))}}</div>
                   <center>
                     <div class="main-border-button" style="margin-top: 3rem !important;">
@@ -68,7 +70,7 @@ $hash_ids = new Hashids(env('APP_KEY'), 8);
                     <span>{!!$game->platform!!}</span>
                     <small style="color: #888 !important">{!!$game->genre!!}</small>
                     <div style="color: #888 !important; font-size: 10px; margin-top: 5px">{!!$game->genre!!}</div>
-                    <div style="font-size: 12px; color: #888; margin-top: 5px ">{!!$game->short_description!!}</div>
+                    <div style="font-size: 12px; color: #888; margin-top: 5px ">{!!Str::words($random->short_description, 5, ' ...')!!}</div>
                     <div style="font-size: 9px; color: #888; margin-top: 10px ">{{date('d F Y', strtotime($game->release_date))}}</div>
                     <center>
                       <div class="main-border-button" style="margin-top: 3rem !important;">
